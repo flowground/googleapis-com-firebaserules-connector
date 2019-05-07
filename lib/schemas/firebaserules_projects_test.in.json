@@ -1,0 +1,158 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "required": true,
+            "type": "string"
+        },
+        "access_token": {
+            "type": "string"
+        },
+        "alt": {
+            "type": "string",
+            "enum": [
+                "json",
+                "media",
+                "proto"
+            ],
+            "default": "json"
+        },
+        "callback": {
+            "type": "string"
+        },
+        "fields": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "oauth_token": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "The request for FirebaseRulesService.TestRuleset.",
+            "properties": {
+                "source": {
+                    "description": "Optional `Source` to be checked for correctness.\n\nThis field must not be set when the resource name refers to a `Ruleset`.",
+                    "properties": {
+                        "files": {
+                            "description": "`File` set constituting the `Source` bundle.",
+                            "items": {
+                                "description": "`File` containing source content.",
+                                "properties": {
+                                    "content": {
+                                        "description": "Textual Content.",
+                                        "type": "string"
+                                    },
+                                    "fingerprint": {
+                                        "description": "Fingerprint (e.g. github sha) associated with the `File`.",
+                                        "format": "byte",
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "description": "File name.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
+                "testSuite": {
+                    "description": "Inline `TestSuite` to run.",
+                    "properties": {
+                        "testCases": {
+                            "description": "Collection of test cases associated with the `TestSuite`.",
+                            "items": {
+                                "description": "`TestCase` messages provide the request context and an expectation as to\nwhether the given context will be allowed or denied. Test cases may specify\nthe `request`, `resource`, and `function_mocks` to mock a function call to\na service-provided function.\n\nThe `request` object represents context present at request-time.\n\nThe `resource` is the value of the target resource as it appears in\npersistent storage before the request is executed.",
+                                "properties": {
+                                    "expectation": {
+                                        "description": "Test expectation.",
+                                        "enum": [
+                                            "EXPECTATION_UNSPECIFIED",
+                                            "ALLOW",
+                                            "DENY"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "functionMocks": {
+                                        "description": "Optional function mocks for service-defined functions. If not set, any\nservice defined function is expected to return an error, which may or may\nnot influence the test outcome.",
+                                        "items": {
+                                            "description": "Mock function definition.\n\nMocks must refer to a function declared by the target service. The type of\nthe function args and result will be inferred at test time. If either the\narg or result values are not compatible with function type declaration, the\nrequest will be considered invalid.\n\nMore than one `FunctionMock` may be provided for a given function name so\nlong as the `Arg` matchers are distinct. There may be only one function\nfor a given overload where all `Arg` values are `Arg.any_value`.",
+                                            "properties": {
+                                                "args": {
+                                                    "description": "The list of `Arg` values to match. The order in which the arguments are\nprovided is the order in which they must appear in the function\ninvocation.",
+                                                    "items": {
+                                                        "description": "Arg matchers for the mock function.",
+                                                        "properties": {
+                                                            "anyValue": {
+                                                                "description": "Argument matches any value provided.",
+                                                                "properties": {},
+                                                                "type": "object"
+                                                            },
+                                                            "exactValue": {
+                                                                "description": "Argument exactly matches value provided."
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "function": {
+                                                    "description": "The name of the function.\n\nThe function name must match one provided by a service declaration.",
+                                                    "type": "string"
+                                                },
+                                                "result": {
+                                                    "description": "The mock result of the function call.",
+                                                    "properties": {
+                                                        "undefined": {
+                                                            "description": "The result is undefined, meaning the result could not be computed.",
+                                                            "properties": {},
+                                                            "type": "object"
+                                                        },
+                                                        "value": {
+                                                            "description": "The result is an actual value. The type of the value must match that\nof the type declared by the service."
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "request": {
+                                        "description": "Request context.\n\nThe exact format of the request context is service-dependent. See the\nappropriate service documentation for information about the supported\nfields and types on the request. Minimally, all services support the\nfollowing fields and types:\n\nRequest field  | Type\n---------------|-----------------\nauth.uid       | `string`\nauth.token     | `map<string, string>`\nheaders        | `map<string, string>`\nmethod         | `string`\nparams         | `map<string, string>`\npath           | `string`\ntime           | `google.protobuf.Timestamp`\n\nIf the request value is not well-formed for the service, the request will\nbe rejected as an invalid argument."
+                                    },
+                                    "resource": {
+                                        "description": "Optional resource value as it appears in persistent storage before the\nrequest is fulfilled.\n\nThe resource type depends on the `request.path` value."
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

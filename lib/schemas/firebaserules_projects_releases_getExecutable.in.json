@@ -1,0 +1,51 @@
+{
+    "type": "object",
+    "properties": {
+        "executableVersion": {
+            "type": "string",
+            "enum": [
+                "RELEASE_EXECUTABLE_VERSION_UNSPECIFIED",
+                "FIREBASE_RULES_EXECUTABLE_V1",
+                "FIREBASE_RULES_EXECUTABLE_V2"
+            ]
+        },
+        "name": {
+            "required": true,
+            "type": "string"
+        },
+        "alt": {
+            "type": "string",
+            "enum": [
+                "json",
+                "media",
+                "proto"
+            ],
+            "default": "json"
+        },
+        "callback": {
+            "type": "string"
+        },
+        "fields": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "oauth_token": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        }
+    }
+}
